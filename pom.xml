@@ -12,7 +12,7 @@
     <artifactId>web_final_back_end</artifactId>
     <version>0.0.1-SNAPSHOT</version>
     <name>web_final_back_end</name>
-    <description>web_final_back_end</description>
+    <description>Microservice pour une web app de finance</description>
     <url/>
     <licenses>
         <license/>
@@ -39,6 +39,22 @@
             <groupId>org.springframework.boot</groupId>
             <artifactId>spring-boot-starter-webmvc-test</artifactId>
             <scope>test</scope>
+        </dependency>
+
+        <dependency>
+            <groupId>org.springdoc</groupId>
+            <artifactId>springdoc-openapi-starter-webmvc-ui</artifactId>
+            <version>3.0.3</version>
+        </dependency>
+
+        <dependency>
+            <groupId>org.springframework.boot</groupId>
+            <artifactId>spring-boot-starter-data-jpa</artifactId>
+        </dependency>
+
+        <dependency>
+            <groupId>org.postgresql</groupId>
+            <artifactId>postgresql</artifactId>
         </dependency>
     </dependencies>
 
