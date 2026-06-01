@@ -19,8 +19,9 @@ public class CategoryServiceImpl implements CategoryService {
 		this.repository = repository;
 	}
 
-	@Override
-	public Category create(Category category) {
+	public Category create(String name) {
+		// faire une verif en basse de donnée
+		Category category = new Category(name);
 		return repository.save(category);
 	}
 

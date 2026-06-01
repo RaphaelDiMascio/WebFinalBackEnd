@@ -5,6 +5,6 @@ import mygroup.web_final_back_end.models.Category;
 import java.util.List;
 
 public interface CategoryService {
-	Category create(Category category);
+	Category create(String name);
 	List<Category> getAll();
 }
