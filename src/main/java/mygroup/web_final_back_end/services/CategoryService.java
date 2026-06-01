@@ -6,5 +6,5 @@ import java.util.List;
 
 public interface CategoryService {
 	Category create(String name);
-	List<Category> getAll();
+	List<Category> getAll(String name);
 }

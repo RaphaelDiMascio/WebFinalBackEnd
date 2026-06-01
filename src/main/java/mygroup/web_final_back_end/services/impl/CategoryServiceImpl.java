@@ -26,7 +26,8 @@ public class CategoryServiceImpl implements CategoryService {
 	}
 
 	@Override
-	public List<Category> getAll() {
+	public List<Category> getAll(String name) {
+		//faut faire
 		return repository.findAll();
 	}
 }

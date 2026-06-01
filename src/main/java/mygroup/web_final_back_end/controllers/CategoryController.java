@@ -21,15 +21,15 @@ public class CategoryController {
 	}
 
 	@GetMapping
-	@Operation(summary = "Get all categories")
-	public ResponseEntity<List<Category>> getAllCategories() {
-		return ResponseEntity.ok(categoryService.getAll());
+	@Operation(summary = "Get all categories", description = "Retrieve all categories with optional search filter on name")
+	public ResponseEntity<List<Category>> getAllCategories(@RequestParam(required = false) String name) {
+		return ResponseEntity.ok(categoryService.getAll(name));
 	}
 
 	@PostMapping
 	@ResponseStatus(HttpStatus.CREATED)
 	@Operation(summary = "Create a new category")
-	public Category create(@RequestBody Category category) {
-		return categoryService.create(category.getName());
+	public ResponseEntity<Category> create(@RequestBody Category category) {
+		return ResponseEntity.ok(categoryService.create(category.getName()));
 	}
 }
