@@ -7,6 +7,7 @@ import mygroup.web_final_back_end.services.CategoryService;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
+import java.util.UUID;
 
 
 @Service
@@ -29,5 +30,15 @@ public class CategoryServiceImpl implements CategoryService {
 	public List<Category> getAll(String name) {
 		//faut faire
 		return repository.findAll();
+	}
+
+	public Category getById(UUID id) {
+		return repository.findById(id)
+				.orElseThrow(() -> new RuntimeException("Catégorie introuvable avec l'ID : " + id));
+	}
+
+	@Override
+	public void deleteById(UUID id) {
+		repository.deleteById(id);
 	}
 }
