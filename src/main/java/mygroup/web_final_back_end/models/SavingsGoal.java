@@ -3,6 +3,7 @@ package mygroup.web_final_back_end.models;
 import com.fasterxml.jackson.annotation.JsonFormat;
 import jakarta.persistence.*;
 
+import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.util.UUID;
 
@@ -25,7 +26,7 @@ public class SavingsGoal {
 
 	@Column(name = "deadline")
 	@JsonFormat(pattern = "yyyy-MM-dd")
-	private LocalDateTime deadline;
+	private LocalDate deadline;
 
 	@ManyToOne
 	@JoinColumn(name = "user_id", nullable = false)
@@ -34,7 +35,7 @@ public class SavingsGoal {
 	public SavingsGoal() {
 	}
 
-	public SavingsGoal(UUID id, String name, String description, Double amount, Double currentAmount, LocalDateTime deadline, User user) {
+	public SavingsGoal(UUID id, String name, String description, Double amount, Double currentAmount, LocalDate deadline, User user) {
 		this.id = id;
 		this.name = name;
 		this.description = description;
@@ -84,11 +85,11 @@ public class SavingsGoal {
 		this.currentAmount = currentAmount;
 	}
 
-	public LocalDateTime getDeadline() {
+	public LocalDate getDeadline() {
 		return deadline;
 	}
 
-	public void setDeadline(LocalDateTime deadline) {
+	public void setDeadline(LocalDate deadline) {
 		this.deadline = deadline;
 	}
 

@@ -13,6 +13,9 @@ public class UserService {
         this.repository = repository;
     }
     public User create(User user) {
+        if (repository.findByUsername(user.getUsername()).isPresent()) {
+            throw new RuntimeException("Le nom d'utilisateur '" + user.getUsername() + "' est déjà pris.");
+        }
         return repository.save(user);
     }
     public User getById(UUID id) {

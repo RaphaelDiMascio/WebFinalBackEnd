@@ -21,14 +21,18 @@ public class CategoryServiceImpl implements CategoryService {
 	}
 
 	public Category create(String name) {
-		// faire une verif en basse de donnée
+		if (repository.findByName(name).isPresent()) {
+			throw new RuntimeException("La catégorie '" + name + "' existe déjà.");
+		}
 		Category category = new Category(name);
 		return repository.save(category);
 	}
 
 	@Override
 	public List<Category> getAll(String name) {
-		//faut faire
+		if (name != null && !name.trim().isEmpty()) {
+			return repository.findByNameContainingIgnoreCase(name);
+		}
 		return repository.findAll();
 	}
 
