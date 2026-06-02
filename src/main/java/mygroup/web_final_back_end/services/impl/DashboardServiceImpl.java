@@ -100,7 +100,8 @@ public class DashboardServiceImpl implements DashboardService {
         List<Transaction> recentTransactions = sortedTxs.subList(0, Math.min(6, sortedTxs.size()));
 
         double balance = income - expense;
-        return new DashboardSummaryDTO(balance, income, expense, totalSavings, spendingDTOs, insights, recentTransactions, goals);
+        double availableBalance = balance - totalSavings;
+        return new DashboardSummaryDTO(balance, availableBalance, income, expense, totalSavings, spendingDTOs, insights, recentTransactions, goals);
     }
 
     private static class CategoryAmount {

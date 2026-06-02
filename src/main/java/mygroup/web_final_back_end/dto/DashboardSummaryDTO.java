@@ -6,6 +6,7 @@ import java.util.List;
 
 public class DashboardSummaryDTO {
     private Double totalBalance;
+    private Double availableBalance;
     private Double totalIncome;
     private Double totalExpense;
     private Double totalSavings;
@@ -16,10 +17,11 @@ public class DashboardSummaryDTO {
 
     public DashboardSummaryDTO() {}
 
-    public DashboardSummaryDTO(Double totalBalance, Double totalIncome, Double totalExpense, Double totalSavings,
+    public DashboardSummaryDTO(Double totalBalance, Double availableBalance, Double totalIncome, Double totalExpense, Double totalSavings,
                                List<CategorySpendingDTO> categorySpending, List<String> insights,
                                List<Transaction> recentTransactions, List<SavingsGoal> savingsGoals) {
         this.totalBalance = totalBalance;
+        this.availableBalance = availableBalance;
         this.totalIncome = totalIncome;
         this.totalExpense = totalExpense;
         this.totalSavings = totalSavings;
@@ -35,6 +37,14 @@ public class DashboardSummaryDTO {
 
     public void setTotalBalance(Double totalBalance) {
         this.totalBalance = totalBalance;
+    }
+
+    public Double getAvailableBalance() {
+        return availableBalance;
+    }
+
+    public void setAvailableBalance(Double availableBalance) {
+        this.availableBalance = availableBalance;
     }
 
     public Double getTotalIncome() {
