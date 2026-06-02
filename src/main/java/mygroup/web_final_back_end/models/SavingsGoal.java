@@ -25,7 +25,6 @@ public class SavingsGoal {
 	private Double currentAmount = 0.0;
 
 	@Column(name = "deadline")
-	@JsonFormat(pattern = "yyyy-MM-dd")
 	private LocalDate deadline;
 
 	@ManyToOne

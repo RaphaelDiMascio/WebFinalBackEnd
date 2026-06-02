@@ -12,6 +12,8 @@ import java.util.List;
 import java.util.UUID;
 
 public interface TransactionRepository extends JpaRepository<Transaction, UUID> {
+	List<Transaction> findByUserId(UUID userId);
+
 	@Query("SELECT t FROM Transaction t WHERE " +
 			"(:userId IS NULL OR t.user.id = :userId) AND " +
 			"(t.transactionDate >= COALESCE(:startDate, t.transactionDate)) AND " +

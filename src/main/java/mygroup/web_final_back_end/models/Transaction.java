@@ -24,6 +24,7 @@ public class Transaction {
 	private Double amount;
 
 	@Column(name = "transaction_date")
+	// a voir pour suppr
 	@JsonFormat(pattern = "yyyy-MM-dd HH:mm")
 	private LocalDateTime transactionDate;
 
