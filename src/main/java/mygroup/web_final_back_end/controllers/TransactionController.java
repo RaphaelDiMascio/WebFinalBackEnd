@@ -1,5 +1,6 @@
 package mygroup.web_final_back_end.controllers;
 
+import io.swagger.v3.oas.annotations.tags.Tag;
 import mygroup.web_final_back_end.models.Transaction;
 import mygroup.web_final_back_end.models.TransactionType;
 import mygroup.web_final_back_end.services.TransactionService;
@@ -12,7 +13,8 @@ import java.util.List;
 import java.util.UUID;
 
 @RestController
-@RequestMapping("/api/transactions")
+@RequestMapping("/api/v1/transactions")
+@Tag(name = "Transactions Management", description = "Endpoints for managing transactions")
 @CrossOrigin(origins = "*")
 public class TransactionController {
 

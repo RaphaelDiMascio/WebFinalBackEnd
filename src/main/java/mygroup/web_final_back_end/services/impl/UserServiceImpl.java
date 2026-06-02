@@ -27,4 +27,14 @@ public class UserServiceImpl implements UserService {
     public User getById(UUID id) {
         return repository.findById(id).orElseThrow(() -> new RuntimeException("User introuvable"));
     }
+
+    @Override
+    public User login(String username, String password) {
+        User user = repository.findByUsername(username)
+                .orElseThrow(() -> new RuntimeException("Nom d'utilisateur introuvable"));
+        if (!user.getPassword().equals(password)) {
+            throw new RuntimeException("Mot de passe incorrect");
+        }
+        return user;
+    }
 }

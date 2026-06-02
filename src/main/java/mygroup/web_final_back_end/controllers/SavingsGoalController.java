@@ -1,4 +1,5 @@
 package mygroup.web_final_back_end.controllers;
+import io.swagger.v3.oas.annotations.tags.Tag;
 import mygroup.web_final_back_end.models.SavingsGoal;
 import mygroup.web_final_back_end.services.SavingsGoalService;
 import org.springframework.http.ResponseEntity;
@@ -9,6 +10,7 @@ import java.util.UUID;
 
 @RestController
 @RequestMapping("/api/v1/savings-goals")
+@Tag(name = "Savings Goals Management", description = "Endpoints for managing savings goals")
 @CrossOrigin(origins = "*")
 public class SavingsGoalController {
 

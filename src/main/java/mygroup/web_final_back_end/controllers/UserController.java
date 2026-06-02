@@ -9,6 +9,7 @@ import java.util.UUID;
 @RestController
 @RequestMapping("/api/v1/users")
 @Tag(name = "User Management", description = "Endpoints for managing users")
+@CrossOrigin(origins = "*")
 public class UserController {
 
     private final UserService userService;
@@ -20,6 +21,11 @@ public class UserController {
     @PostMapping
     public ResponseEntity<User> createUser(@RequestBody User user) {
         return ResponseEntity.ok(userService.create(user));
+    }
+
+    @PostMapping("/login")
+    public ResponseEntity<User> loginUser(@RequestBody User user) {
+        return ResponseEntity.ok(userService.login(user.getUsername(), user.getPassword()));
     }
 
     @GetMapping("/{id}")
