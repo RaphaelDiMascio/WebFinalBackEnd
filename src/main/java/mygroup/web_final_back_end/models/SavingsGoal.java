@@ -16,15 +16,17 @@ public class SavingsGoal {
 	@Column(name = "id", updatable = false, nullable = false)
 	private UUID id;
 
+	@Column(nullable = false)
 	private String name;
 
 	private String description;
 
+	@Column(nullable = false)
 	private Double amount;
 
 	private Double currentAmount = 0.0;
 
-	@Column(name = "deadline")
+	@Column(name = "deadline", nullable = false)
 	private LocalDate deadline;
 
 	@ManyToOne

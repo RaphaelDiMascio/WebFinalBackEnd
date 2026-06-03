@@ -23,7 +23,7 @@ public class Transaction {
 	@Column(nullable = false)
 	private Double amount;
 
-	@Column(name = "transaction_date")
+	@Column(name = "transaction_date", nullable = false)
 	// a voir pour suppr
 	@JsonFormat(pattern = "yyyy-MM-dd HH:mm")
 	private LocalDateTime transactionDate;
@@ -37,7 +37,7 @@ public class Transaction {
 	private Category category;
 
 	@ManyToOne
-	@JoinColumn(name = "user_id")
+	@JoinColumn(name = "user_id", nullable = false)
 	private User user;
 
 	public Transaction() {}
