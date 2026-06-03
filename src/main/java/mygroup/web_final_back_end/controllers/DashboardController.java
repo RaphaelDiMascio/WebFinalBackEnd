@@ -1,11 +1,11 @@
 package mygroup.web_final_back_end.controllers;
 
 import io.swagger.v3.oas.annotations.tags.Tag;
-import mygroup.web_final_back_end.dto.DashboardSummaryDTO;
 import mygroup.web_final_back_end.services.DashboardService;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.Map;
 import java.util.UUID;
 
 @RestController
@@ -21,7 +21,10 @@ public class DashboardController {
     }
 
     @GetMapping("/summary")
-    public ResponseEntity<DashboardSummaryDTO> getSummary(@RequestParam UUID userId) {
-        return ResponseEntity.ok(dashboardService.getSummary(userId));
+    public ResponseEntity<Map<String, Object>> getSummary(
+            @RequestParam UUID userId,
+            @RequestParam(required = false) Integer year,
+            @RequestParam(required = false) Integer month) {
+        return ResponseEntity.ok(dashboardService.getSummary(userId, year, month));
     }
 }
