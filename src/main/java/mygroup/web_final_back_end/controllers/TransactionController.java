@@ -1,6 +1,9 @@
 package mygroup.web_final_back_end.controllers;
 
 import io.swagger.v3.oas.annotations.tags.Tag;
+import mygroup.web_final_back_end.exceptions.CategoryNotFoundByIdException;
+import mygroup.web_final_back_end.exceptions.TransactionNotFoundByIdException;
+import mygroup.web_final_back_end.exceptions.UserNotFoundByIdException;
 import mygroup.web_final_back_end.models.Transaction;
 import mygroup.web_final_back_end.models.TransactionType;
 import mygroup.web_final_back_end.services.TransactionService;
@@ -25,7 +28,7 @@ public class TransactionController {
 	}
 
 	@GetMapping("/{id}")
-	public ResponseEntity<Transaction> getTransactionById(@PathVariable UUID id) {
+	public ResponseEntity<Transaction> getTransactionById(@PathVariable UUID id) throws TransactionNotFoundByIdException {
 		return ResponseEntity.ok(transactionService.getById(id));
 	}
 
@@ -33,7 +36,7 @@ public class TransactionController {
 	public ResponseEntity<Transaction> createTransaction(
 			@RequestBody Transaction transaction,
 			@RequestParam UUID userId,
-			@RequestParam UUID categoryId) {
+			@RequestParam UUID categoryId) throws UserNotFoundByIdException, CategoryNotFoundByIdException {
 		return ResponseEntity.ok(transactionService.create(transaction, userId, categoryId));
 	}
 
@@ -41,7 +44,7 @@ public class TransactionController {
 	public ResponseEntity<Transaction> updateTransaction(
 			@PathVariable UUID id,
 			@RequestBody Transaction transaction,
-			@RequestParam(required = false) UUID categoryId) {
+			@RequestParam(required = false) UUID categoryId) throws TransactionNotFoundByIdException, CategoryNotFoundByIdException {
 		return ResponseEntity.ok(transactionService.update(id, transaction, categoryId));
 	}
 

@@ -1,5 +1,8 @@
 package mygroup.web_final_back_end.services.impl;
 
+import mygroup.web_final_back_end.exceptions.BadRequestException;
+import mygroup.web_final_back_end.exceptions.SavingsGoalNotFoundByIdException;
+import mygroup.web_final_back_end.exceptions.UserNotFoundByIdException;
 import mygroup.web_final_back_end.models.SavingsGoal;
 import mygroup.web_final_back_end.models.User;
 import mygroup.web_final_back_end.models.Transaction;
@@ -32,17 +35,17 @@ public class SavingsGoalServiceImpl implements SavingsGoalService {
 	}
 
 	@Override
-	public SavingsGoal create(SavingsGoal goal, UUID userId) {
+	public SavingsGoal create(SavingsGoal goal, UUID userId) throws UserNotFoundByIdException {
 		User user = userRepository.findById(userId)
-				.orElseThrow(() -> new RuntimeException("User introuvable"));
+				.orElseThrow(() -> new UserNotFoundByIdException("User introuvable"));
 		goal.setUser(user);
 		return goalRepository.save(goal);
 	}
 
 	@Override
-	public SavingsGoal updateProgress(UUID goalId, Double newCurrentAmount) {
+	public SavingsGoal updateProgress(UUID goalId, Double newCurrentAmount) throws SavingsGoalNotFoundByIdException {
 		SavingsGoal goal = goalRepository.findById(goalId)
-				.orElseThrow(() -> new RuntimeException("Objectif introuvable"));
+				.orElseThrow(() -> new SavingsGoalNotFoundByIdException("Objectif introuvable"));
 
 		UUID userId = goal.getUser().getId();
 		double oldCurrentAmount = goal.getCurrentAmount() != null ? goal.getCurrentAmount() : 0.0;
@@ -73,7 +76,7 @@ public class SavingsGoalServiceImpl implements SavingsGoalService {
 
 			double availableBalance = income - expense - totalSavings;
 			if (diff > availableBalance) {
-				throw new RuntimeException("Solde insuffisant sur votre compte courant pour effectuer ce transfert d'épargne !");
+				throw new BadRequestException("Solde insuffisant sur votre compte courant pour effectuer ce transfert d'épargne !");
 			}
 		}
 

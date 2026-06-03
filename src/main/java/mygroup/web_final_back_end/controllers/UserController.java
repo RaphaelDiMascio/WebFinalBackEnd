@@ -1,5 +1,6 @@
 package mygroup.web_final_back_end.controllers;
 import io.swagger.v3.oas.annotations.tags.Tag;
+import mygroup.web_final_back_end.exceptions.UserNotFoundByIdException;
 import mygroup.web_final_back_end.models.User;
 import mygroup.web_final_back_end.services.UserService;
 import org.springframework.http.ResponseEntity;
@@ -24,12 +25,12 @@ public class UserController {
     }
 
     @PostMapping("/login")
-    public ResponseEntity<User> loginUser(@RequestBody User user) {
+    public ResponseEntity<User> loginUser(@RequestBody User user) throws UserNotFoundByIdException {
         return ResponseEntity.ok(userService.login(user.getUsername(), user.getPassword()));
     }
 
     @GetMapping("/{id}")
-    public ResponseEntity<User> getUserById(@PathVariable UUID id) {
+    public ResponseEntity<User> getUserById(@PathVariable UUID id) throws UserNotFoundByIdException {
         return ResponseEntity.ok(userService.getById(id));
     }
 }

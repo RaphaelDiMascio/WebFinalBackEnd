@@ -1,5 +1,7 @@
 package mygroup.web_final_back_end.services.impl;
 
+import mygroup.web_final_back_end.exceptions.BadRequestException;
+import mygroup.web_final_back_end.exceptions.UserNotFoundByIdException;
 import mygroup.web_final_back_end.models.User;
 import mygroup.web_final_back_end.repositories.UserRepository;
 import mygroup.web_final_back_end.services.UserService;
@@ -18,22 +20,22 @@ public class UserServiceImpl implements UserService {
     @Override
     public User create(User user) {
         if (repository.findByUsername(user.getUsername()).isPresent()) {
-            throw new RuntimeException("Le nom d'utilisateur '" + user.getUsername() + "' est déjà pris.");
+            throw new BadRequestException("Le nom d'utilisateur '" + user.getUsername() + "' est déjà pris.");
         }
         return repository.save(user);
     }
     
     @Override
-    public User getById(UUID id) {
-        return repository.findById(id).orElseThrow(() -> new RuntimeException("User introuvable"));
+    public User getById(UUID id) throws UserNotFoundByIdException {
+        return repository.findById(id).orElseThrow(() -> new UserNotFoundByIdException("User introuvable"));
     }
 
     @Override
-    public User login(String username, String password) {
+    public User login(String username, String password) throws UserNotFoundByIdException {
         User user = repository.findByUsername(username)
-                .orElseThrow(() -> new RuntimeException("Nom d'utilisateur introuvable"));
+                .orElseThrow(() -> new UserNotFoundByIdException("Nom d'utilisateur introuvable"));
         if (!user.getPassword().equals(password)) {
-            throw new RuntimeException("Mot de passe incorrect");
+            throw new BadRequestException("Mot de passe incorrect");
         }
         return user;
     }

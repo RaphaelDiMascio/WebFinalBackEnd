@@ -1,6 +1,8 @@
 package mygroup.web_final_back_end.services.impl;
 
 import jakarta.transaction.Transactional;
+import mygroup.web_final_back_end.exceptions.BadRequestException;
+import mygroup.web_final_back_end.exceptions.CategoryNotFoundByIdException;
 import mygroup.web_final_back_end.models.Category;
 import mygroup.web_final_back_end.repositories.CategoryRepository;
 import mygroup.web_final_back_end.services.CategoryService;
@@ -22,7 +24,7 @@ public class CategoryServiceImpl implements CategoryService {
 
 	public Category create(String name) {
 		if (repository.findByName(name).isPresent()) {
-			throw new RuntimeException("La catégorie '" + name + "' existe déjà.");
+			throw new BadRequestException("La catégorie '" + name + "' existe déjà.");
 		}
 		Category category = new Category(name);
 		return repository.save(category);
@@ -36,9 +38,9 @@ public class CategoryServiceImpl implements CategoryService {
 		return repository.findAll();
 	}
 
-	public Category getById(UUID id) {
+	public Category getById(UUID id) throws CategoryNotFoundByIdException {
 		return repository.findById(id)
-				.orElseThrow(() -> new RuntimeException("Catégorie introuvable avec l'ID : " + id));
+				.orElseThrow(() -> new CategoryNotFoundByIdException("Catégorie introuvable avec l'ID : " + id));
 	}
 
 	@Override

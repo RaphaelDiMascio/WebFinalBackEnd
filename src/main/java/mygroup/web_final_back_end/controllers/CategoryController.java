@@ -2,6 +2,7 @@ package mygroup.web_final_back_end.controllers;
 
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.tags.Tag;
+import mygroup.web_final_back_end.exceptions.CategoryNotFoundByIdException;
 import mygroup.web_final_back_end.models.Category;
 import mygroup.web_final_back_end.services.CategoryService;
 import org.springframework.http.HttpStatus;
@@ -36,7 +37,7 @@ public class CategoryController {
 	}
 
 	@GetMapping("/{id}")
-	public ResponseEntity<Category> getCategoryById(@PathVariable UUID id) {
+	public ResponseEntity<Category> getCategoryById(@PathVariable UUID id) throws CategoryNotFoundByIdException {
 		return ResponseEntity.ok(categoryService.getById(id));
 	}
 

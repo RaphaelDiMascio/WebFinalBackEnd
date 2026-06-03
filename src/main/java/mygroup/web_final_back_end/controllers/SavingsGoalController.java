@@ -1,5 +1,7 @@
 package mygroup.web_final_back_end.controllers;
 import io.swagger.v3.oas.annotations.tags.Tag;
+import mygroup.web_final_back_end.exceptions.SavingsGoalNotFoundByIdException;
+import mygroup.web_final_back_end.exceptions.UserNotFoundByIdException;
 import mygroup.web_final_back_end.models.SavingsGoal;
 import mygroup.web_final_back_end.services.SavingsGoalService;
 import org.springframework.http.ResponseEntity;
@@ -28,14 +30,14 @@ public class SavingsGoalController {
 	@PostMapping
 	public ResponseEntity<SavingsGoal> createGoal(
 			@RequestBody SavingsGoal goal,
-			@RequestParam UUID userId) {
+			@RequestParam UUID userId) throws UserNotFoundByIdException {
 		return ResponseEntity.ok(savingsGoalService.create(goal, userId));
 	}
 
 	@PutMapping("/{id}/progress")
 	public ResponseEntity<SavingsGoal> updateProgress(
 			@PathVariable UUID id,
-			@RequestParam Double currentAmount) {
+			@RequestParam Double currentAmount) throws SavingsGoalNotFoundByIdException {
 		return ResponseEntity.ok(savingsGoalService.updateProgress(id, currentAmount));
 	}
 

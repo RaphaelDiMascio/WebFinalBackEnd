@@ -1,5 +1,8 @@
 package mygroup.web_final_back_end.services.impl;
 
+import mygroup.web_final_back_end.exceptions.CategoryNotFoundByIdException;
+import mygroup.web_final_back_end.exceptions.TransactionNotFoundByIdException;
+import mygroup.web_final_back_end.exceptions.UserNotFoundByIdException;
 import mygroup.web_final_back_end.models.Category;
 import mygroup.web_final_back_end.models.Transaction;
 import mygroup.web_final_back_end.models.TransactionType;
@@ -29,17 +32,17 @@ public class TransactionServiceImpl implements TransactionService {
 	}
 
 	@Override
-	public Transaction getById(UUID id) {
+	public Transaction getById(UUID id) throws TransactionNotFoundByIdException {
 		return transactionRepository.findById(id)
-				.orElseThrow(() -> new RuntimeException("Transaction introuvable"));
+				.orElseThrow(() -> new TransactionNotFoundByIdException("Transaction introuvable"));
 	}
 
 	@Override
-	public Transaction create(Transaction transaction, UUID userId, UUID categoryId) {
+	public Transaction create(Transaction transaction, UUID userId, UUID categoryId) throws UserNotFoundByIdException, CategoryNotFoundByIdException {
 		User user = userRepository.findById(userId)
-				.orElseThrow(() -> new RuntimeException("Utilisateur introuvable"));
+				.orElseThrow(() -> new UserNotFoundByIdException("Utilisateur introuvable"));
 		Category category = categoryRepository.findById(categoryId)
-				.orElseThrow(() -> new RuntimeException("Catégorie introuvable"));
+				.orElseThrow(() -> new CategoryNotFoundByIdException("Catégorie introuvable"));
 
 		transaction.setUser(user);
 		transaction.setCategory(category);
@@ -47,7 +50,7 @@ public class TransactionServiceImpl implements TransactionService {
 	}
 
 	@Override
-	public Transaction update(UUID id, Transaction updatedData, UUID categoryId) {
+	public Transaction update(UUID id, Transaction updatedData, UUID categoryId) throws TransactionNotFoundByIdException, CategoryNotFoundByIdException {
 		Transaction existing = getById(id);
 
 		existing.setAmount(updatedData.getAmount());
@@ -57,7 +60,7 @@ public class TransactionServiceImpl implements TransactionService {
 
 		if (categoryId != null) {
 			Category category = categoryRepository.findById(categoryId)
-					.orElseThrow(() -> new RuntimeException("Nouvelle catégorie introuvable"));
+					.orElseThrow(() -> new CategoryNotFoundByIdException("Nouvelle catégorie introuvable"));
 			existing.setCategory(category);
 		}
 
