@@ -17,7 +17,8 @@ CREATE TABLE app_user (
 
 CREATE TABLE category (
     id UUID PRIMARY KEY,
-    name VARCHAR(100) NOT NULL UNIQUE
+    name VARCHAR(100) NOT NULL,
+    user_id UUID REFERENCES app_user(id) ON DELETE CASCADE
 );
 
 CREATE TABLE savings_goal (

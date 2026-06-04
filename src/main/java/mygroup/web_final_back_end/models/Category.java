@@ -12,8 +12,12 @@ public class Category {
 	@Column(name = "id", updatable = false, nullable = false)
 	private UUID id;
 
-	@Column(name = "name", unique = true, nullable = false, length = 100)
+	@Column(name = "name", nullable = false, length = 100)
 	private String name;
+
+	@ManyToOne
+	@JoinColumn(name = "user_id", nullable = true)
+	private User user;
 
 	public Category() {
 	}
@@ -36,5 +40,13 @@ public class Category {
 
 	public void setName(String name) {
 		this.name = name;
+	}
+
+	public User getUser() {
+		return user;
+	}
+
+	public void setUser(User user) {
+		this.user = user;
 	}
 }

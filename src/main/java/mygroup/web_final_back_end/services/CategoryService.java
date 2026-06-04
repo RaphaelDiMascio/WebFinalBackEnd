@@ -7,9 +7,8 @@ import java.util.List;
 import java.util.UUID;
 
 public interface CategoryService {
-	Category create(String name);
-	List<Category> getAll(String name);
+	Category create(UUID userId, String name);
+	List<Category> getAll(UUID userId, String name);
 	Category getById(UUID id) throws CategoryNotFoundByIdException;
 	void deleteById(UUID id);
-
 }

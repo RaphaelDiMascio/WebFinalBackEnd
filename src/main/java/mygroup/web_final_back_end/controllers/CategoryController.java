@@ -24,16 +24,20 @@ public class CategoryController {
 	}
 
 	@GetMapping
-	@Operation(summary = "Get all categories", description = "Retrieve all categories with optional search filter on name")
-	public ResponseEntity<List<Category>> getAllCategories(@RequestParam(required = false) String name) {
-		return ResponseEntity.ok(categoryService.getAll(name));
+	@Operation(summary = "Get all categories", description = "Retrieve all categories with optional search filter on name and scoped to a specific user (including global categories)")
+	public ResponseEntity<List<Category>> getAllCategories(
+			@RequestParam(required = false) UUID userId,
+			@RequestParam(required = false) String name) {
+		return ResponseEntity.ok(categoryService.getAll(userId, name));
 	}
 
 	@PostMapping
 	@ResponseStatus(HttpStatus.CREATED)
 	@Operation(summary = "Create a new category")
-	public ResponseEntity<Category> create(@RequestBody Category category) {
-		return ResponseEntity.ok(categoryService.create(category.getName()));
+	public ResponseEntity<Category> create(
+			@RequestParam(required = false) UUID userId,
+			@RequestBody Category category) {
+		return ResponseEntity.ok(categoryService.create(userId, category.getName()));
 	}
 
 	@GetMapping("/{id}")
