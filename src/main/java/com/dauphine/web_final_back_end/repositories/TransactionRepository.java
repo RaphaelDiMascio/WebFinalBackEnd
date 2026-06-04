@@ -26,4 +26,7 @@ public interface TransactionRepository extends JpaRepository<Transaction, UUID> 
 			@Param("categoryId") UUID categoryId,
 			@Param("type") TransactionType type
 	);
+
+	boolean existsByCategoryId(UUID categoryId);
+
 }

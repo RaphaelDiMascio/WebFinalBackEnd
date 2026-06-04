@@ -11,4 +11,6 @@ public interface CategoryService {
 	List<Category> getAll(UUID userId, String name);
 	Category getById(UUID id) throws CategoryNotFoundByIdException;
 	void deleteById(UUID id);
+	Category update(UUID id, String name);
+
 }

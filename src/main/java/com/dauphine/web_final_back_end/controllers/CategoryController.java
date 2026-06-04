@@ -46,10 +46,19 @@ public class CategoryController {
 	}
 
 
+	@PutMapping("/{id}")
+	@Operation(summary = "Update category name", description = "Modify the name of an existing custom category")
+	public ResponseEntity<Category> updateCategory(
+			@PathVariable UUID id,
+			@RequestBody Category categoryDetails) {
+		return ResponseEntity.ok(categoryService.update(id, categoryDetails.getName()));
+	}
+
 	@DeleteMapping("/{id}")
 	@Operation(summary = "Delete category", description = "Delete a category by its unique ID")
 	public ResponseEntity<Void> deleteCategory(@PathVariable UUID id) {
 		categoryService.deleteById(id);
 		return ResponseEntity.noContent().build();
 	}
+
 }

@@ -28,7 +28,7 @@ public class DashboardServiceImpl implements DashboardService {
         List<Transaction> transactions = transactionRepository.findByUserId(userId);
         List<SavingsGoal> goals = savingsGoalRepository.findByUserId(userId);
 
-        // 1. Calculate cumulative balances (all time history)
+        // Calculate cumulative balances (all time history)
         double allTimeIncome = 0.0;
         double allTimeExpense = 0.0;
         for (Transaction tx : transactions) {
@@ -49,7 +49,7 @@ public class DashboardServiceImpl implements DashboardService {
         double balance = allTimeIncome - allTimeExpense;
         double availableBalance = balance - totalSavings;
 
-        // 2. Identify target month for flow statistics
+        // identify target month for flow statistics
         int targetYear = year != null ? year : Calendar.getInstance().get(Calendar.YEAR);
         int targetMonth = month != null ? month : (Calendar.getInstance().get(Calendar.MONTH) + 1);
 
@@ -104,7 +104,7 @@ public class DashboardServiceImpl implements DashboardService {
         // Sort descending by amount
         categorySpending.sort((a, b) -> ((Double) b.get("amount")).compareTo((Double) a.get("amount")));
 
-        // 4. Generate monthly specific insights
+        // generate monthly specific insights
         List<String> insights = new ArrayList<>();
         if (transactions.isEmpty()) {
             insights.add("Bienvenue ! Ajoutez vos premieres transactions pour recevoir des analyses personnalisees.");
@@ -142,7 +142,7 @@ public class DashboardServiceImpl implements DashboardService {
         });
         List<Transaction> recentTransactions = sortedTxs.subList(0, Math.min(8, sortedTxs.size()));
 
-        // 5. Build dynamic Map summary
+        // dynamic Map summary
         Map<String, Object> summary = new HashMap<>();
         summary.put("totalBalance", balance);
         summary.put("availableBalance", availableBalance);
