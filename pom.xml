@@ -8,7 +8,7 @@
         <version>4.0.2</version>
         <relativePath/> <!-- lookup parent from repository -->
     </parent>
-    <groupId>mygroup</groupId>
+    <groupId>com.dauphine</groupId>
     <artifactId>web_final_back_end</artifactId>
     <version>0.0.1-SNAPSHOT</version>
     <name>web_final_back_end</name>

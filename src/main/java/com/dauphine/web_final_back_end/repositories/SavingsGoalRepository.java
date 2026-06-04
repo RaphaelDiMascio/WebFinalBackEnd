@@ -1,0 +1,13 @@
+package com.dauphine.web_final_back_end.repositories;
+
+import com.dauphine.web_final_back_end.models.SavingsGoal;
+import org.springframework.data.jpa.repository.JpaRepository;
+
+import java.util.List;
+import java.util.UUID;
+
+public interface SavingsGoalRepository extends JpaRepository<SavingsGoal, UUID> {
+
+	// recup les objectifs de l'utilisateur connecté
+	List<SavingsGoal> findByUserId(UUID userId);
+}
