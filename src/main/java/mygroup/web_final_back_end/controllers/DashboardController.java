@@ -1,5 +1,6 @@
 package mygroup.web_final_back_end.controllers;
 
+import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.tags.Tag;
 import mygroup.web_final_back_end.services.DashboardService;
 import org.springframework.http.ResponseEntity;
@@ -21,6 +22,7 @@ public class DashboardController {
     }
 
     @GetMapping("/summary")
+    @Operation(summary = "Get dashboard summary", description = "Retrieve aggregated financial summary data for a user, optionally filtered by year and month")
     public ResponseEntity<Map<String, Object>> getSummary(
             @RequestParam UUID userId,
             @RequestParam(required = false) Integer year,

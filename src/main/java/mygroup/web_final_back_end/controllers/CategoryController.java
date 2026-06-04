@@ -37,12 +37,14 @@ public class CategoryController {
 	}
 
 	@GetMapping("/{id}")
+	@Operation(summary = "Get category by ID", description = "Retrieve a specific category by its unique ID")
 	public ResponseEntity<Category> getCategoryById(@PathVariable UUID id) throws CategoryNotFoundByIdException {
 		return ResponseEntity.ok(categoryService.getById(id));
 	}
 
 
 	@DeleteMapping("/{id}")
+	@Operation(summary = "Delete category", description = "Delete a category by its unique ID")
 	public ResponseEntity<Void> deleteCategory(@PathVariable UUID id) {
 		categoryService.deleteById(id);
 		return ResponseEntity.noContent().build();

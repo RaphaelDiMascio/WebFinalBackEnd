@@ -1,5 +1,6 @@
 package mygroup.web_final_back_end.controllers;
 
+import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.tags.Tag;
 import mygroup.web_final_back_end.exceptions.CategoryNotFoundByIdException;
 import mygroup.web_final_back_end.exceptions.TransactionNotFoundByIdException;
@@ -28,11 +29,13 @@ public class TransactionController {
 	}
 
 	@GetMapping("/{id}")
+	@Operation(summary = "Get transaction by ID", description = "Retrieve details of a specific transaction by its unique ID")
 	public ResponseEntity<Transaction> getTransactionById(@PathVariable UUID id) throws TransactionNotFoundByIdException {
 		return ResponseEntity.ok(transactionService.getById(id));
 	}
 
 	@PostMapping
+	@Operation(summary = "Create a transaction", description = "Create a new transaction (income/expense) for a user and link it to a category")
 	public ResponseEntity<Transaction> createTransaction(
 			@RequestBody Transaction transaction,
 			@RequestParam UUID userId,
@@ -41,6 +44,7 @@ public class TransactionController {
 	}
 
 	@PutMapping("/{id}")
+	@Operation(summary = "Update transaction details", description = "Modify an existing transaction's details by its ID")
 	public ResponseEntity<Transaction> updateTransaction(
 			@PathVariable UUID id,
 			@RequestBody Transaction transaction,
@@ -49,12 +53,14 @@ public class TransactionController {
 	}
 
 	@DeleteMapping("/{id}")
+	@Operation(summary = "Delete transaction", description = "Delete a specific transaction by its unique ID")
 	public ResponseEntity<Void> deleteTransaction(@PathVariable UUID id) {
 		transactionService.deleteById(id);
 		return ResponseEntity.noContent().build();
 	}
 
 	@GetMapping("/search")
+	@Operation(summary = "Search transactions", description = "Search and filter user transactions by date range, category, and/or transaction type")
 	public ResponseEntity<List<Transaction>> searchTransactions(
 			@RequestParam UUID userId,
 			@RequestParam(required = false) @DateTimeFormat(iso = DateTimeFormat.ISO.DATE) LocalDate startDate,
