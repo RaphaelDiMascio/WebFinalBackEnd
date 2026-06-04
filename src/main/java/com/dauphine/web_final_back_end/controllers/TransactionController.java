@@ -19,7 +19,6 @@ import java.util.UUID;
 @RestController
 @RequestMapping("/api/v1/transactions")
 @Tag(name = "Transactions Management", description = "Endpoints for managing transactions")
-@CrossOrigin(origins = "*")
 public class TransactionController {
 
 	private final TransactionService transactionService;

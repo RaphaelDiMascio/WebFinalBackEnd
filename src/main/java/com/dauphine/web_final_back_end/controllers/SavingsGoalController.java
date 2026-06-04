@@ -14,7 +14,6 @@ import java.util.UUID;
 @RestController
 @RequestMapping("/api/v1/savings-goals")
 @Tag(name = "Savings Goals Management", description = "Endpoints for managing savings goals")
-@CrossOrigin(origins = "*")
 public class SavingsGoalController {
 
 	private final SavingsGoalService savingsGoalService;

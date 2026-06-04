@@ -11,7 +11,6 @@ import java.util.UUID;
 @RestController
 @RequestMapping("/api/v1/users")
 @Tag(name = "User Management", description = "Endpoints for managing users")
-@CrossOrigin(origins = "*")
 public class UserController {
 
     private final UserService userService;

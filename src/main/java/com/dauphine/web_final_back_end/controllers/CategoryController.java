@@ -15,7 +15,6 @@ import java.util.UUID;
 @RestController
 @RequestMapping("/api/v1/categories")
 @Tag(name = "Category Management", description = "Endpoints for managing finance categories")
-@CrossOrigin(origins = "*")
 public class CategoryController {
 	private final CategoryService categoryService;
 

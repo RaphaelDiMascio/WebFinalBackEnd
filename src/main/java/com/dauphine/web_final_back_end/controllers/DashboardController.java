@@ -12,7 +12,6 @@ import java.util.UUID;
 @RestController
 @RequestMapping("/api/v1/dashboard")
 @Tag(name = "Dashboard Management", description = "Endpoints for retrieving aggregated dashboard data")
-@CrossOrigin(origins = "*")
 public class DashboardController {
 
     private final DashboardService dashboardService;
