@@ -11,5 +11,6 @@ public interface SavingsGoalService {
 	List<SavingsGoal> getByUserId(UUID userId);
 	SavingsGoal create(SavingsGoal goal, UUID userId) throws UserNotFoundByIdException;
 	SavingsGoal updateProgress(UUID goalId, Double newCurrentAmount) throws SavingsGoalNotFoundByIdException;
+	SavingsGoal update(UUID id, SavingsGoal goalDetails) throws SavingsGoalNotFoundByIdException;
 	void deleteById(UUID id);
 }

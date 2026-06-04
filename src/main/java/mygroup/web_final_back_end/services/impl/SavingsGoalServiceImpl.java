@@ -85,6 +85,29 @@ public class SavingsGoalServiceImpl implements SavingsGoalService {
 	}
 
 	@Override
+	public SavingsGoal update(UUID id, SavingsGoal goalDetails) throws SavingsGoalNotFoundByIdException {
+		SavingsGoal goal = goalRepository.findById(id)
+				.orElseThrow(() -> new SavingsGoalNotFoundByIdException("Objectif introuvable"));
+
+		if (goalDetails.getName() == null || goalDetails.getName().trim().isEmpty()) {
+			throw new BadRequestException("L'intitulé du projet est obligatoire.");
+		}
+		if (goalDetails.getAmount() == null || goalDetails.getAmount() <= 0) {
+			throw new BadRequestException("Le capital cible doit être supérieur à 0.");
+		}
+		if (goalDetails.getDeadline() == null) {
+			throw new BadRequestException("La date butoir est obligatoire.");
+		}
+
+		goal.setName(goalDetails.getName().trim());
+		goal.setDescription(goalDetails.getDescription() != null ? goalDetails.getDescription().trim() : null);
+		goal.setAmount(goalDetails.getAmount());
+		goal.setDeadline(goalDetails.getDeadline());
+
+		return goalRepository.save(goal);
+	}
+
+	@Override
 	public void deleteById(UUID id) {
 		goalRepository.deleteById(id);
 	}

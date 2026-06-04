@@ -45,6 +45,14 @@ public class SavingsGoalController {
 		return ResponseEntity.ok(savingsGoalService.updateProgress(id, currentAmount));
 	}
 
+	@PutMapping("/{id}")
+	@Operation(summary = "Update a savings goal", description = "Update the details (name, description, target amount, deadline) of a specific savings goal")
+	public ResponseEntity<SavingsGoal> updateGoal(
+			@PathVariable UUID id,
+			@RequestBody SavingsGoal goalDetails) throws SavingsGoalNotFoundByIdException {
+		return ResponseEntity.ok(savingsGoalService.update(id, goalDetails));
+	}
+
 	@DeleteMapping("/{id}")
 	@Operation(summary = "Delete savings goal", description = "Delete a specific savings goal by its unique ID")
 	public ResponseEntity<Void> deleteGoal(@PathVariable UUID id) {
